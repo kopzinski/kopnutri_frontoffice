@@ -1,38 +1,69 @@
+
 <!DOCTYPE html>
-<html lang="pt-br" ng-app="projeto">
-    <head>
-        <base href="/">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
-        <title>Cinelura</title>
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-        <style>
-            .my-panel-repeat {
-              -webkit-transition:transform 0.8s;
-              transition:transform 0.8s;
-            }
-             
-            .my-panel-repeat.ng-leave-active{
-              transform: scale(0.1);
-            } 
-        </style>
+<html lang="ptBR" ng-app="kopnutri" >
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="img/favicon.ico">
+
+    <title>Registre seu peso</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-slider.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/kopnutri.css" rel="stylesheet">
+    <link href="css/input-range.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
         <script src="js/lib/angular.min.js"></script>
-        <script src="js/lib/angular-resource.min.js"></script>
-        <script src="js/lib/angular-animate.min.js"></script>
-        <script src="js/lib/angular-route.min.js"></script>
-        <script src="js/lib/angular-cookies.min.js"></script>
         <script src="js/main.js"></script>
-        <script src="js/controllers/principal-controller.js"></script>
-        <script src="js/controllers/foto-controller.js"></script>
-        <script src="js/controllers/grupo-controller.js"></script>
-        <script src="js/services/foto-service.js"></script>
-        <script src="js/directives/my-panel.js"></script>
-        <script src="js/directives/my-picture.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            <ng-view></ng-view>
-        </div> <!-- fim container -->        
-    </body>
+        <script src="js/controllers/antropometrias-controller.js"></script>
+  </head>
+
+  <body ng-controller="AntropometriasController">
+
+    <div class="container">
+
+      <form class="form-group form-registro-peso div-center"  ng-submit="registrarPeso()">
+        <h2 class="form-group-heading">Registre seu peso</h2>
+        <!--<label for="inputEmail" class="sr-only">Email address</label>-->
+        <input ng-model="antro.peso"  type="text" id="peso" class="form-control input-lg input-center input-more-lg" placeholder="80.5 kg" required autofocus>
+
+        <input type="range">
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Peso</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="ant in antropometrias">
+                  <td>{{ant.data}}</td>
+                  <td>{{ant.peso}} kg</td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Registrar</button>
+      </form>
+
+    </div> <!-- /container -->
+
+  </body>
 </html>
